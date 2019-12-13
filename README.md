@@ -18,11 +18,10 @@ After submitting this information, you should see two cards- this is your hand. 
 ### Starting Menu
 
 ![menuScreen](./assets/menuScreen.png)
-![gameScreen](./assets/gameScreen.png)
 
 ### Game Screen
 
-![]
+![gameScreen](./assets/gameScreen.png)
 
 ## Architecture
 
