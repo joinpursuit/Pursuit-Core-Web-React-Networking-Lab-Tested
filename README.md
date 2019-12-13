@@ -13,6 +13,17 @@ Take a look at the `assets` folder in this directory for an unstyled version of 
 
 After submitting this information, you should see two cards- this is your hand. Go around in a circle and play [blackjack](https://en.wikipedia.org/wiki/Blackjack) as normal - hit when you want to hit, stay if you want to stay, and try to best your opponents!
 
+## Sample Images
+
+### Starting Menu
+
+![menuScreen](./assets/menuScreen.png)
+![gameScreen](./assets/gameScreen.png)
+
+### Game Screen
+
+![]
+
 ## Architecture
 
 So, we _could_ do this with one component handling everything. That's... fine. However, if you want to do three components (`App`, `Menu`, and `Hand`, perhaps), that's also fine!
