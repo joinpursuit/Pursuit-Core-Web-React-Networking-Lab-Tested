@@ -1,8 +1,8 @@
 import { shallow } from "enzyme";
 
 import App from "./App";
-import { Game } from "./Game";
-import { Menu } from "./Menu";
+import Game from "./Game";
+import Menu from "./Menu";
 
 jest.mock("axios");
 

@@ -11,7 +11,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --ci --reporters=default --reporters=jest-junit --testPathIgnorePatterns=bonus",
+    "test:bonus": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress": "./node_modules/.bin/cypress open"
   },

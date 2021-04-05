@@ -1,11 +1,11 @@
 import { mount } from "enzyme";
 
-import { Status } from "./Status";
+import Status from "./Status";
 
 describe("Status", () => {
   it.each([
     [null, ["2", "2", "2", "2"]],
-    [null, ["ACE", "8H"]],
+    [null, ["ACE", "8"]],
     [null, ["ACE", "ACE"]],
     ["Busted...", ["10", "9", "4"]],
     ["Busted...", ["10", "9", "2", "ACE"]],
@@ -18,6 +18,6 @@ describe("Status", () => {
   ])("renders %s when given %p", (expected, values) => {
     const wrapped = mount(<Status cards={values.map((value) => ({ value }))} />);
 
-    expect(wrapped.html()).toBe(expected);
+    expect(wrapped.html()).toContain(expected);
   });
 });

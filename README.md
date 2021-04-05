@@ -47,6 +47,7 @@ This state should be stored in `App`, with `Menu` and `Game` accepting props and
 ## Bonus
 
 Add a `Status` component as a child of `Game` that renders `Blackjack!` if the player can have a score of 21, `Busted...` if the player is busted, or `null` otherwise.
+Create a cards prop for Status which takes an array of cards from the API.
 
 - The value of cards two through ten is their value (2 through 10).
 - Face cards (Jack, Queen, and King) are all worth 10.
@@ -69,5 +70,3 @@ Add a `Status` component as a child of `Game` that renders `Blackjack!` if the p
 - When finished, commit and push your work.
 - Make a pull request on github.
 - Submit the link to your pull request on Canvas.
-
-[Additional instructions]
