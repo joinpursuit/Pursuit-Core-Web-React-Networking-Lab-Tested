@@ -22,7 +22,7 @@ export default function Status({ cards }) {
   }
 
   for (let i = 0; i <= aces; i += 1) {
-    if (score + i * 9 === 21) {
+    if (score + i * 10 === 21) {
       return "Blackjack!";
     }
   }
