@@ -1,6 +1,6 @@
 const faces = new Set(["JACK", "QUEEN", "KING"]);
 
-export function Status({ cards }) {
+export default function Status({ cards }) {
   const { aces, score } = cards.reduce(
     (totals, next) => {
       if (next.value === "ACE") {

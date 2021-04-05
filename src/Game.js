@@ -1,6 +1,6 @@
 import { Status } from "./Status";
 
-export function Game({ cards, deckId, onHit }) {
+export default function Game({ cards, deckId, onHit }) {
   return (
     <div id="game">
       <p>Deck ID: {deckId}</p>
