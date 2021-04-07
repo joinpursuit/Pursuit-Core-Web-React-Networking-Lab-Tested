@@ -45,22 +45,20 @@ class App extends React.Component {
 
   handleGenerateDeck = async () => {
     try {
-      const { data: { deck_id } } = await axios.get(`${API}/new/shuffle`)
-      this.setState({ deckId: deck_id })
-      const { data: cardsRes } = await axios.get(`${API}/${deck_id}/draw?count=2`)
-      this.setState({ cards: cardsRes.cards })
+      const { data: { deck_id, cards } } = await axios.get(`${API}/new/draw?count=2`)
+      this.setState({ deckId: deck_id, cards })
     } catch {
       alert('Something went wrong 😢')
     }
   }
 
   render() {
-    const { deckId } = this.state
+    const { deckId, cards } = this.state
     return (
       <div className="app">
         <h1>Blackjack</h1>
-        <p>Deck ID: {this.state.deckId}</p>
-        { !deckId ?
+        <p>Deck ID: {deckId}</p>
+        { !cards.length ?
           <Menu
             handleDeckIdChange={this.handleDeckIdChange}
             handleGenerateDeck={this.handleGenerateDeck}

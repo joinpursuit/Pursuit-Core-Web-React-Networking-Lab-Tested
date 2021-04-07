@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Menu = ({ handleGenerateDeck, handleDeckIdChange, deckId, handleDraw }) => {
   return (
     <div>
