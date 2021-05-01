@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "deck_id": "my-deck-id",
+  "cards": [
+    {
+      "code": "0D",
+      "image": "https://deckofcardsapi.com/static/img/0D.png",
+      "images": {
+        "svg": "https://deckofcardsapi.com/static/img/0D.svg",
+        "png": "https://deckofcardsapi.com/static/img/0D.png"
+      },
+      "value": "10",
+      "suit": "DIAMONDS"
+    },
+    {
+      "code": "9H",
+      "image": "https://deckofcardsapi.com/static/img/9H.png",
+      "images": {
+        "svg": "https://deckofcardsapi.com/static/img/9H.svg",
+        "png": "https://deckofcardsapi.com/static/img/9H.png"
+      },
+      "value": "9",
+      "suit": "HEARTS"
+    }
+  ],
+  "remaining": 48
+}

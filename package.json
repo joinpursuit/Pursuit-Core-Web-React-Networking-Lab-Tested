@@ -1,0 +1,51 @@
+{
+  "name": "react-assignment-template",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.21.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --ci --reporters=default --reporters=jest-junit --testPathIgnorePatterns=bonus",
+    "test:bonus": "react-scripts test",
+    "eject": "react-scripts eject",
+    "cypress": "./node_modules/.bin/cypress open"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.0",
+    "cypress": "^6.7.0",
+    "enzyme": "^3.11.0",
+    "fast-glob": "^3.2.5",
+    "jest-junit": "^12.0.0",
+    "junitxml-to-javascript": "^1.1.4",
+    "node-fetch": "^2.6.1"
+  },
+  "jest-junit": {
+    "suiteNameTemplate": "{filename}",
+    "classNameTemplate": "{filename}",
+    "outputDirectory": "reports/junit"
+  }
+}

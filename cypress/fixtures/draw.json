@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "deck_id": "my-deck-id",
+  "cards": [
+    {
+      "code": "8D",
+      "image": "https://deckofcardsapi.com/static/img/8D.png",
+      "images": {
+        "svg": "https://deckofcardsapi.com/static/img/8D.svg",
+        "png": "https://deckofcardsapi.com/static/img/8D.png"
+      },
+      "value": "8",
+      "suit": "DIAMONDS"
+    }
+  ],
+  "remaining": 47
+}
