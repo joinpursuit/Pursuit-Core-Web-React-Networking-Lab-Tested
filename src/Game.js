@@ -1,16 +1,14 @@
 import React from "react";
 
-const Game = ({ deckID, cards }) => {
+const Game = ({ deckID, cards, hitMe }) => {
 
-
-  
   return (
     <section>
       <p>Deck ID: {deckID}</p>
       {cards.map((card) => {
         return <img src={card.image} />;
       })}
-      <button>Hit me!</button>
+      <button onClick={hitMe}>Hit me!</button>
     </section>
   );
 };

@@ -43,6 +43,25 @@ export default class App extends React.Component {
     }
   };
 
+  hitMe = async () => {
+      try {
+        const card = await axios.get(
+          `https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=1`
+        );
+        console.log(card)
+        this.setState((prevState) => {
+          
+          return {cards:[...card.data.cards, ...prevState.cards]}})
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }
+  
+    componentDidUpdate (prevState) {
+    }
+  
+
   handleChange=(e)=>{
     this.setState({deckID: e.target.value})
   }
@@ -54,7 +73,7 @@ export default class App extends React.Component {
       <div className="app">
         <h1>Blackjack</h1>
         <Menu className={showMenu} getDeck={this.getDeck} drawCard={this.drawCard} handleChange={this.handleChange}/>
-        <Game  className={showGame}deckID={deckID} cards={cards}/>
+        <Game  className={showGame}deckID={deckID} cards={cards} hitMe={this.hitMe}/>
        
       </div>
     );
