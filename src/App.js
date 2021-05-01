@@ -8,11 +8,11 @@ import axios from "axios";
 export default class App extends Component {
   state = { deckID: "", existingID: "", updatedInput: "", cardArray: [], newDeckID: false };
   
-  drawCards = async () => {
+  drawCards = async (deckID) => {
       try {
-        
+        console.log(deckID)
         const res = await axios.get(
-         "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
+         `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=2`
        );
  
        // https://deckofcardsapi.com/api/deck/new/draw/?count=52
@@ -22,7 +22,7 @@ export default class App extends Component {
        this.setState({cardArray: res.data.cards})
        // console.log(`DECK ID: ${this.state.deckID}`);
        // console.log(`CARD Array: ${this.state.cardArray}`);
-        this.GenerateTwoCards();
+        // this.GenerateTwoCards();
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +30,8 @@ export default class App extends Component {
     }
     
     GenerateTwoCards = async () => {
-      this.setState({newDeckID:true})
+      this.drawCards("new")
+      // this.setState({newDeckID:true})
     }
     
     showDeck = async () => {};
@@ -52,7 +53,7 @@ export default class App extends Component {
       return (
         <div className="app">
         {/* <h1>Hello, world!</h1> */}
-        {this.state.deckID ? <Game deckID={this.state.deckID} cardArray={this.state.cardArray} /> : <Menu drawCards={this.drawCards} existingDeck={this.existingDeck} updateInput={this.updateInput}/> }
+        {this.state.deckID ? <Game deckID={this.state.deckID} cardArray={this.state.cardArray} /> : <Menu GenerateTwoCards={this.GenerateTwoCards} existingDeck={this.existingDeck} updateInput={this.updateInput}/> }
          {/* <Game deckID={this.state.deckID} cardArray={this.state.cardArray} /> */}
       </div>
     );

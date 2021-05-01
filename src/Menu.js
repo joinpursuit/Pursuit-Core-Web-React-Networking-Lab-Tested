@@ -1,13 +1,13 @@
 import React from "react";
 
 const Menu = (props) => {
-  const {drawCards, existingDeck, updateInput} = props
+  const { existingDeck, updateInput, GenerateTwoCards} = props
   
 
   return(
     <div>
       <h1>Blackjack</h1>
-      <button onClick={drawCards}>Generate Deck</button><br></br>
+      <button onClick={GenerateTwoCards}>Generate Deck</button><br></br>
       <form onSubmit={existingDeck}>
       <label htmlFor="deckID">
         Input Existing Deck
