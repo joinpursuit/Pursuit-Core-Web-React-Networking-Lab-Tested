@@ -1,13 +1,17 @@
 import React from "react";
-
+import axios from "axios";
 import "./App.css";
 
-export default class App extends React.Component {
+class App extends React.Component {
+  state = { deckID: "", cards: [] }
+
   render() {
     return (
       <div className="app">
-        <h1>Hello, world!</h1>
+        <h1>Blackjack!</h1>
       </div>
     );
   }
 }
+
+export default App;
