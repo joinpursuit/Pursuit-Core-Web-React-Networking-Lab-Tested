@@ -5,7 +5,7 @@ import Menu from "./components/Menu";
 import Game from "./components/Game";
 
 class App extends React.Component {
-  state = { deckID: "", cards: [] };
+  state = { deckID: "", cards: "" };
 
   generateDeck = async () => {
     try {
@@ -20,12 +20,28 @@ class App extends React.Component {
       this.state({ deckID: "" });
     }
   };
-  getCard = () => {};
+
+  handleChange = (e) => {
+    this.setState({deckID: e.target.value})
+    try {
+      const res = await axios.get(
+        `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=2`
+      );
+      const newDeck = res.data.deck_id;
+      const twoCards = res.data.cards;
+    }
+  } 
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+  }
+
   render() {
-    if (this.state.deckID === "") {
+    if (this.state.cards === "") {
       return (
         <div className="app">
-          <Menu props={this.state} generateDeck={this.generateDeck} />
+          <Menu props={this.state} generateDeck={this.generateDeck} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
         </div>
       );
     } else {

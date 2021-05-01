@@ -1,18 +1,17 @@
 import React from 'react';
 import axios from "axios";
 
-export default function Menu({props,generateDeck}) {
-    const {deckID ,cards} = props
-    // const generateDeck = this.props
-    console.log(deckID)
+export default function Menu({props, generateDeck, handleChange, handleSubmit}) {
+    const {deckID, cards} = props
+    // console.log(deckID)
     return (
         <div>
             <h1>Blackjack!</h1>
             <button onClick={generateDeck}>Generate Deck</button>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>
                     Input Existing Deck
-                    <input />
+                    <input type="text" value={deckID} onChange={handleChange}/>
                 </label>
                 <button>Draw</button>
             </form>
