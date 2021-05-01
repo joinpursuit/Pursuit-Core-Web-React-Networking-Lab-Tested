@@ -27,6 +27,7 @@ export default class App extends React.Component {
       const res = await axios.get(
         `https://deckofcardsapi.com/api/deck/${input}/draw/?count=2`
       );
+      // this.setState({ cards: res.data.cards[].images})
       debugger;
     } catch (error) {
       debugger;
@@ -36,11 +37,11 @@ export default class App extends React.Component {
 
   render() {
     console.log(this.state.deckId);
-    const { deckId } = this.state
+    const { deckId, cards } = this.state
     return (
       <div className="app">
         {!deckId ? <Menu generateDeck={this.generateDeck} drawCard={this.drawCard} /> : null}
-        <Game />
+        <Game deckId={deckId} cards={cards}/>
       </div>
     );
   }
