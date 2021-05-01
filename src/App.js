@@ -6,7 +6,15 @@ import Menu from "./Menu";
 import axios from "axios";
 
 export default class App extends React.Component {
-  state = { deckId: "" };
+  state = { deckId: "", cards: [] };
+
+  card = () => {
+    this.state.cards.map((card) => {
+      console.log("card")
+      // debugger;
+      // return <img src={card} alt="card" />;
+    });
+  };
 
   generateDeck = async () => {
     try {
@@ -24,11 +32,11 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { deckId } = this.state;
+    const { deckId, cards } = this.state;
     return (
       <div className="app">
         <Menu generateDeck={this.generateDeck} deckId={deckId} />
-        <Game deckId={deckId} />
+        <Game deckId={deckId} card={this.card} cards={cards}/>
       </div>
     );
   }
