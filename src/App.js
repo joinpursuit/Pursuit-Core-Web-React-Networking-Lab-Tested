@@ -10,7 +10,8 @@ export default class App extends Component {
   
   drawCards = async () => {
       try {
-       const res = await axios.get(
+        
+        const res = await axios.get(
          "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
        );
  
