@@ -10,9 +10,8 @@ export default class App extends React.Component {
 
   generateDeck = async () => {
     try {
-      const res = await axios.get(
-        "https://deckofcardsapi.com/api/deck/new/draw?count=2"
-      );
+      const res = await axios.get("https://deckofcardsapi.com/api/deck/new/draw?count=2");
+      debugger
       this.setState({ deckId: res.data.deck_id, cards: res.data.cards });
     } catch (error) {
       console.log(error);
@@ -22,30 +21,27 @@ export default class App extends React.Component {
 
   drawCard = async (input) => {
     try {
-      // debugger;
-      // this.setState({ deckId: input });
-      const res = await axios.get(
-        `https://deckofcardsapi.com/api/deck/${input}/draw/?count=2`
-      );
-      this.setState({ deckId: input, cards: res.data.cards });
+      const res = await axios.get(`https://deckofcardsapi.com/api/deck/${input}/draw/?count=2`);
+      this.setState({ deckId: input, cards: res.data.cards })
+
     } catch (error) {
       console.log(error);
     }
   };
 
+
   hitMe = async () => {
+    const { deckId } = this.state;
     try {
-      const { deckId } = this.state;
-      const res = await axios.get(
-        `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`
-      );
+      const res = await axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
       this.setState((prevState) => {
-        return { cards: [...prevState.cards, ...res.data.cards] };
-      });
+        return { cards: [...prevState.cards, ...res.data.cards] }
+      })
     } catch (error) {
       console.log(error);
     }
-  };
+
+  }
 
   render() {
     console.log(this.state.deckId);
@@ -53,8 +49,8 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <h1>Blackjack</h1>
-        {!deckId ? <Menu generateDeck={this.generateDeck} drawCard={this.drawCard} /> :
-          <Game deckId={deckId} cards={cards} hitMe={this.hitMe} />}
+        {!deckId ? <Menu generateDeck={this.generateDeck} drawCard={this.drawCard} /> : <Game deckId={deckId} cards={cards} hitMe={this.hitMe} />}
+
       </div>
     );
   }

@@ -14,9 +14,10 @@ class Menu extends React.Component {
     return (
       <div>
         <button onClick={generateDeck}>Generate Deck</button>
-        <label htmlFor="deckInput">Input Existing Deck</label>
-        <input onChange={this.handleChange} value={input} name="deckInput" />
-        <button onClick={() => drawCard(input)}>Draw</button>
+        <br />
+          <label htmlFor="deckInput">Input Existing Deck</label>
+          <input onChange={this.handleChange} value={input} name="deckInput" />
+          <button onClick={() => drawCard(input)}>Draw</button>
       </div>
     );
   }
