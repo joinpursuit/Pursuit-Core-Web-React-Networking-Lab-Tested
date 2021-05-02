@@ -1,15 +1,15 @@
 import React from "react";
 
-const Game = ({deckID, cards}) => {
+const Game = ({deckID, cards, handleClick}) => {
 
 
   return (
     <div>
       <p>Deck ID: {deckID}</p>
       {cards.map(card=>{
-        return  <img src = {card.image} />
+        return  <img src = {card.image} key={card.image}/>
       })}
-      <button>Hit Me!</button>
+      <button onClick = {handleClick}>Hit Me!</button>
     </div>
   )
 };

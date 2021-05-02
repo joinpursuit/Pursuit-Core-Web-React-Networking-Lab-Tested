@@ -1,27 +1,20 @@
 import React from "react";
+import axios from 'axios'
+import "./App.css"
 
 class Menu extends React.Component {
-  state={input: ""}
+ 
 
-  handleChange = (e) => {
-    const myDeckID= e.target.value;
-    this.setState({ input: myDeckID });
-  }
-  
-  handleSubmit = () =>{
-
-  }
-  
   render() {
-    const {generateDeck, deckID} = this.props
+    const {generateDeck, handleChange, handleSubmit, showMenu} = this.props
     return (
-      <div>
+      <div className = {showMenu ? 'show' : 'hide'}>
     
         <button onClick = {generateDeck}>Generate Deck</button>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <label>
             Input Existing Deck
-            <input type="text" value="" onChange={this.handleChange}/>
+            <input type="text" id="my-deck-id" onChange={handleChange}/>
           </label>
             <button>Draw</button>
         </form>
