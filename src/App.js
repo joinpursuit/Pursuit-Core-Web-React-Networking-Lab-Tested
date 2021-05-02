@@ -5,7 +5,7 @@ import Menu from "./components/Menu";
 import Game from "./components/Game";
 
 class App extends React.Component {
-  state = { deckID: "", cards: "" };
+  state = { deckId: "", cards: "" };
 
   generateDeck = async () => {
     try {
@@ -14,27 +14,50 @@ class App extends React.Component {
       );
       const newDeck = res.data.deck_id;
       const twoCards = res.data.cards;
-      this.setState({ deckID: newDeck, cards: twoCards });
+      this.setState({ deckId: newDeck, cards: twoCards });
       // console.log(twoCards)
     } catch (err) {
-      this.state({ deckID: "" });
+      this.setState({ deckId: "" });
     }
   };
 
   handleChange = (e) => {
-    this.setState({deckID: e.target.value})
-    try {
-      const res = await axios.get(
-        `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=2`
-      );
-      const newDeck = res.data.deck_id;
-      const twoCards = res.data.cards;
-    }
+    this.setState({deckId: e.target.value})
+
   } 
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const res = await axios.get(
+        `https://deckofcardsapi.com/api/deck/${this.state.deckId}/draw?count=2`
+        );
+        // console.log(res)
+        const newDeck = res.data.deck_id;
+        const twoCards = res.data.cards;
+        this.setState({deckId: newDeck, cards: twoCards });
+      }catch (err) {
+        this.setState({ deckId: "" });
+      }
+      // console.log(this.state)  
+  }
+  addCard = async (e) => {
+    e.preventDefault()
+    // console.log(this.state.deckId)
+    try {
+      const res = await axios.get(
+        `https://deckofcardsapi.com/api/deck/${this.state.deckId}/draw?count=1`
+        );
+        console.log(res)
+        const singleCard = res.data.cards[0];
+        this.setState((prevState) => ({
+          cards: [...prevState.cards, singleCard],
+        }));
+        // this.setState({ cards: singleCard });
+      }catch (err) {
+        this.setState({ cards: "" });
 
+      }
   }
 
   render() {
@@ -45,10 +68,10 @@ class App extends React.Component {
         </div>
       );
     } else {
-      console.log(this.state);
+      // console.log(this.state);
       return (
         <>
-          <Game props={this.state} />
+          <Game deckId={this.state.deckId} props={this.state} addCard={this.addCard} />
         </>
       );
     }
@@ -56,3 +79,4 @@ class App extends React.Component {
 }
 
 export default App;
+// xarx4hic68m7

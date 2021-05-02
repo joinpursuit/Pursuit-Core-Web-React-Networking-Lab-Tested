@@ -1,9 +1,8 @@
 import React from 'react';
-import axios from "axios";
 
 export default function Menu({props, generateDeck, handleChange, handleSubmit}) {
-    const {deckID, cards} = props
-    // console.log(deckID)
+    const {deckId, cards} = props
+    // console.log(deckId)
     return (
         <div>
             <h1>Blackjack!</h1>
@@ -11,7 +10,7 @@ export default function Menu({props, generateDeck, handleChange, handleSubmit}) 
             <form onSubmit={handleSubmit}>
                 <label>
                     Input Existing Deck
-                    <input type="text" value={deckID} onChange={handleChange}/>
+                    <input type="text" value={deckId} onChange={handleChange}/>
                 </label>
                 <button>Draw</button>
             </form>
