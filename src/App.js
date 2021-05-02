@@ -24,19 +24,50 @@ export default class App extends React.Component {
     }
   };
 
+
+
+generateDeckId = async () => {
+  try {
+    const res = await axios.get(
+      "https://deckofcardsapi.com/api/deck/new/draw?count=2"
+    );
+    this.setState({ deckId: res.data.deck_id, cards: res.data.cards, showMenu:false, showGame:true});
+    // debugger
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
   // componentDidUpdate() {}
 
-  useDeck = async () => {
-    try {
-      const res = await axios.get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deckId}/draw?count=2`
-      );
-      this.setState({ cards: res.data.cards , showMenu:false, showGame:true});
-      //debugger;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  useDeck = async (event) => {    
+     debugger
+
+  //   try {
+  //     const res = await axios.get(
+  //       `https://deckofcardsapi.com/api/deck/${this.state.deckId}/draw?count=2`
+  //     );
+  //     this.setState({ cards: res.data.cards , showMenu:false, showGame:true});
+  //     //debugger;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  try {
+    const res = await axios.get(
+      `https://deckofcardsapi.com/api/deck/${event.target.input.value}/draw?count=2`
+    );
+    this.setState({ deckId: event.target.input.value, cards: res.data.cards, showMenu:false, showGame:true});
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+
 
   addCard = async () => {
     try {
@@ -45,7 +76,7 @@ export default class App extends React.Component {
       );
       console.log(res)
       this.setState((prevState) => ({
-        cards: [...res.data.cards, ...prevState.cards],
+        cards: [...prevState.cards,...res.data.cards],
       }));
       console.log(this.state)
     } catch (err) {

@@ -30,7 +30,7 @@ class Menu extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.useDeck();
+    this.props.useDeck(e);
 
   };
 
