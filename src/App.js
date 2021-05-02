@@ -39,14 +39,8 @@ export default class App extends React.Component {
   };
 
   handleChange = (e) => {
-    const { deckId } = this.state;
-    console.log(deckId);
     this.setState({ deckId: e.target.value });
   };
-
-  // componentDidMount() {
-  //   this.generateDeck();
-  // }
 
   hitMe = async (e) => {
     e.preventDefault();
@@ -81,8 +75,6 @@ export default class App extends React.Component {
             fetch2CardsByDeckId={this.fetch2CardsByDeckId}
             generateDeck={this.generateDeck}
             handleChange={this.handleChange}
-            deckId={deckId}
-            cards={cards}
           />
         )}
       </div>
