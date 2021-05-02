@@ -55,8 +55,9 @@ export default class App extends React.Component {
       const res = await axios.get(
         `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=1`
       );
-      const hitMeArr = res.data.cards;
-      this.setState({ cards: hitMeArr });
+      const hitMeCardArr = res.data.cards;
+      console.log(hitMeCardArr)
+      this.setState((prevState) => ({cards: [...prevState.cards, ...hitMeCardArr] }));
     } catch (error) {
       this.setState({cards: []});
     }
