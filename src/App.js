@@ -6,7 +6,7 @@ import axios from "axios";
 import "./App.css";
 
 export default class App extends React.Component {
-  state = { deckId: "", cards: [], showCards: false };
+  state = { deckId: "", cards: [] };
 
   generateDeck = async () => {
     try {
@@ -16,8 +16,7 @@ export default class App extends React.Component {
       console.log(res);
       const cardsArr = res.data.cards;
       const cardsId = res.data.deck_id;
-      this.setState({ deckId: cardsId, cards: cardsArr});
-      this.toggleCards();
+      this.setState({ deckId: cardsId, cards: cardsArr });
     } catch (error) {
       this.setState({ cards: [] });
     }
@@ -32,7 +31,6 @@ export default class App extends React.Component {
       );
       const cardsArr = res.data.cards;
       this.setState({ cards: cardsArr });
-      this.toggleCards();
     } catch (error) {
       this.setState({ cards: [] });
     }
@@ -50,17 +48,13 @@ export default class App extends React.Component {
         `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=1`
       );
       const hitMeCardArr = res.data.cards;
-      console.log(hitMeCardArr)
-      this.setState((prevState) => ({cards: [...prevState.cards, ...hitMeCardArr] }));
+      console.log(hitMeCardArr);
+      this.setState((prevState) => ({
+        cards: [...prevState.cards, ...hitMeCardArr],
+      }));
     } catch (error) {
-      this.setState({cards: []});
+      this.setState({ cards: [] });
     }
-  };
-
-  toggleCards = () => {
-    this.setState((prevState) => {
-      return { showCards: !prevState.showCards };
-    });
   };
 
   render() {
@@ -68,7 +62,7 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <h1>Blackjack</h1>
-        {this.state.showCards ? (
+        {deckId && cards.length !== 0 ? (
           <Game hitMe={this.hitMe} deckId={deckId} cards={cards} />
         ) : (
           <Menu
