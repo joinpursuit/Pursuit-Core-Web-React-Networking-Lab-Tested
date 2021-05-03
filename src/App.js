@@ -39,14 +39,8 @@ export default class App extends React.Component {
   };
 
   handleChange = (e) => {
-    const { deckId } = this.state;
-    console.log(deckId);
     this.setState({ deckId: e.target.value });
   };
-
-  // componentDidMount() {
-  //   this.generateDeck();
-  // }
 
   hitMe = async (e) => {
     e.preventDefault();
@@ -55,8 +49,9 @@ export default class App extends React.Component {
       const res = await axios.get(
         `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=1`
       );
-      const hitMeArr = res.data.cards;
-      this.setState({ cards: hitMeArr });
+      const hitMeCardArr = res.data.cards;
+      console.log(hitMeCardArr)
+      this.setState((prevState) => ({cards: [...prevState.cards, ...hitMeCardArr] }));
     } catch (error) {
       this.setState({cards: []});
     }
@@ -80,8 +75,6 @@ export default class App extends React.Component {
             fetch2CardsByDeckId={this.fetch2CardsByDeckId}
             generateDeck={this.generateDeck}
             handleChange={this.handleChange}
-            deckId={deckId}
-            cards={cards}
           />
         )}
       </div>
