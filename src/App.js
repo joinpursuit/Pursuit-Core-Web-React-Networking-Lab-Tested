@@ -1,6 +1,6 @@
 import React from "react";
-import Menu from "./components/Menu";
-import Game from "./components/Game";
+import Menu from "./Menu.js";
+import Game from "./Game.js";
 import axios from "axios";
 
 import "./App.css";
