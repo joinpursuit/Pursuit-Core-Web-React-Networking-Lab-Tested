@@ -1,7 +1,15 @@
-import React from "react";
+import React, { Component } from 'react'
 
-const Game = () => {
-  return null;
-};
+export default class Game extends Component {
 
-export default Game;
+
+
+  render() {
+    return (
+      <div>
+        
+      </div>
+    )
+  }
+  
+}
