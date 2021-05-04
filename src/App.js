@@ -5,17 +5,18 @@ import axios from "axios";
 import "./App.css";
 
 export default class App extends React.Component {
-  state = { deckID: "", cardArray: [] };
+  state = { deckId: "", cards: [] };
 
   getNewDeck = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`https://deckofcardsapi.com/api/deck/new/draw?count=2`);
-      console.log("hi");
-      this.setState({ deckID: res.data.deck_id });
+      const res = await axios.get(
+        `https://deckofcardsapi.com/api/deck/new/draw?count=2`
+      );
+      this.setState({ deckId: res.data.deck_id, cards: res.data.cards });
       // debugger
     } catch (err) {
-      this.setState({ deckID: [] });
+      this.setState({ deckId: "" });
     }
   };
 
@@ -24,28 +25,48 @@ export default class App extends React.Component {
 
     try {
       const res = await axios.get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deckID}/draw/?count=2`
+        `https://deckofcardsapi.com/api/deck/${this.state.deckId}/draw?count=1`
       );
-     
-        this.setState({cardArray: res.data.cards})
-      //  debugger
-
-      
+      this.setState((prevState) => ({
+        cards: [...prevState.cards, ...res.data.cards],
+      }));
     } catch (err) {
-      this.setState({ deckID: [] });
+      this.setState({ deckId: "" });
+    }
+  };
+
+  updateDeckId = async (input) => {
+    this.setState({ deckId: input });
+    try {
+      const res = await axios.get(
+        `https://deckofcardsapi.com/api/deck/${input}/draw?count=2`
+      );
+
+      this.setState({ cards: res.data.cards });
+    } catch (err) {
+      this.setState({ deckId: "" });
     }
   };
 
   componentDidMount() {
     // this.getNewDeck()
-  };
+  }
 
   render() {
-    const { deckID,cardArray } = this.state;
+    const { deckId, cards } = this.state;
     return (
       <div className="app">
-        <Menu getNewDeck={this.getNewDeck} hitMe={this.hitMe} />
-        <Game cardArray={cardArray} deckID={deckID} hitMe={this.hitMe} />
+        <h2>Blackjack</h2>
+        { deckId && cards.length !== 0 ? 
+        <Game cards={cards} deckId={deckId} hitMe={this.hitMe}/> :
+        <Menu
+          updateId={this.updateDeckId}
+          getNewDeck={this.getNewDeck}
+          hitMe={this.hitMe}
+          deckId={deckId}
+          cards={cards}
+        />}
+
       </div>
     );
   }
