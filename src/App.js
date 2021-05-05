@@ -52,13 +52,11 @@ class App extends React.Component {
         this.setState((prevState) => ({
           cards: [...prevState.cards, singleCard],
         }));
-        // this.setState({ cards: singleCard });
       }catch (err) {
         this.setState({ cards: "" });
 
       }
   }
-
   render() {
     if (this.state.cards === "") {
       return (
@@ -67,7 +65,6 @@ class App extends React.Component {
         </div>
       );
     } else {
-      // console.log(this.state);
       return (
         <>
           <Game deckId={this.state.deckId} cards={this.state.cards} addCard={this.addCard} />
