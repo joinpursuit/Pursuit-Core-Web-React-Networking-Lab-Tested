@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 
 export default class Game extends Component {
-    componentDidMount(){
-    }
-   
+
     render() {
-        // console.log(this.props)
-        // const {deckId, cards} = this.props
-        // console.log(this.props.props.cards)
-        const cardList = this.props.props.cards.map(card =>{
-            {console.log(card)}
+        const cardList = this.props.cards.map(card =>{
             return( <li key={card.code}>
                 <img src={card.image}/> 
                 </li>)

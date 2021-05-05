@@ -48,7 +48,6 @@ class App extends React.Component {
       const res = await axios.get(
         `https://deckofcardsapi.com/api/deck/${this.state.deckId}/draw?count=1`
         );
-        console.log(res)
         const singleCard = res.data.cards[0];
         this.setState((prevState) => ({
           cards: [...prevState.cards, singleCard],
@@ -71,7 +70,7 @@ class App extends React.Component {
       // console.log(this.state);
       return (
         <>
-          <Game deckId={this.state.deckId} props={this.state} addCard={this.addCard} />
+          <Game deckId={this.state.deckId} cards={this.state.cards} addCard={this.addCard} />
         </>
       );
     }

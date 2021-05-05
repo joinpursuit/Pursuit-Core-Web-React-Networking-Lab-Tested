@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Menu({props, generateDeck, handleChange, handleSubmit}) {
-    const {deckId, cards} = props
+    const { deckId } = props
     // console.log(deckId)
     return (
         <div>
