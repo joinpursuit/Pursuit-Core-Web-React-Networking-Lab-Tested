@@ -1,19 +1,17 @@
 import React from "react";
 
-const Game = ({deckID, hitMe, cardArray}) => {
- 
+const Game = ({ deckID, hitMe, cardArray, cardsRemaining }) => {
 
-  
-  return(
+  return (
     <div className="my-deck-id">
-      Deck ID: {deckID}
-{cardArray.map((card) => {
-  return  <img alt="2" src={card.image}/>
-  
-})}
-    <button onClick={hitMe}>Hit Me!</button>
+      <p>Deck ID: {deckID}</p>
+      <p>Cards Left: {cardsRemaining} </p> 
+      <button onClick={hitMe}>Hit Me!</button>
+      {cardArray.map((card) => {
+        return <img src={card.image} key={card.image} alt={card.image} />;
+      })}
     </div>
-  )
+  );
 };
 
 export default Game;

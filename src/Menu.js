@@ -2,17 +2,18 @@ import { Component } from "react";
 
 class Menu extends Component {
   render() {
-    const { getNewDeck} = this.props;
+    const { getNewDeck, changeID, draw} = this.props;
     return (
       <div className="my-deck-id">
         <h2>Blackjack</h2>
-        <button type="button" onClick={getNewDeck}>Generate Deck</button>
+        <button onClick={getNewDeck}>Generate Deck</button>
         <form>
           <label>
             Input Existing Deck
             
-            <input />
+            <input onChange={changeID}/>
           </label>
+          <button onClick={draw}>Draw</button>
         </form>
       </div>
     );
