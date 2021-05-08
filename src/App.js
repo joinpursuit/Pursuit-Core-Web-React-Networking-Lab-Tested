@@ -1,78 +1,71 @@
-import React from "react";
-import Menu from "./Menu";
+import React, { useState } from "react";
 import Game from "./Game";
 import axios from "axios";
+import MenuHooks from "./MenuHooks";
 
 import "./App.css";
 
-export default class App extends React.Component {
-  state = { deckID: "", cards: [], showMenu: true };
+const App = () => {
+  const [deckID, setDeckID] = useState("");
+  const [cards, setCards] = useState([]);
+  const [showMenu, setShowMenu] = useState(true);
 
-  generateDeck = async () => {
+  const generateDeck = async () => {
     try {
       const res = await axios.get(
         "https://deckofcardsapi.com/api/deck/new/draw?count=2"
       );
-      this.setState({
-        deckID: res.data.deck_id,
-        cards: res.data.cards,
-        showMenu: false,
-      });
+      setDeckID(res.data.deck_id);
+      setCards(res.data.cards);
+      setShowMenu(false);
     } catch (error) {
       console.log(error);
-      this.setState({ deckID: "", cards: [] });
+      setDeckID("");
+      setCards([]);
     }
   };
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const myDeckID = e.target.value;
-    this.setState({ deckID: myDeckID });
+    setDeckID(myDeckID);
   };
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { deckID } = this.state;
-
       const res = await axios.get(
         `https://deckofcardsapi.com/api/deck/${deckID}/draw?count=2`
       );
 
-      this.setState({ cards: res.data.cards });
+      setCards(res.data.cards);
     } catch (error) {
       console.log(error);
     }
   };
 
-  handleClick = async () => {
+  const handleClick = async () => {
     try {
-      const { deckID } = this.state;
       const res = await axios.get(
         `https://deckofcardsapi.com/api/deck/${deckID}/draw?count=1`
       );
-      this.setState((prevState)=>(
-        { cards: [...prevState.cards, ...res.data.cards] }))
+      setCards((prevCards) => [...prevCards, ...res.data.cards]);
     } catch (error) {
       console.log(error);
     }
   };
 
+  return (
+    <div className="app">
+      <h2>Blackjack</h2>
+      <MenuHooks
+        generateDeck={generateDeck}
+        handleChange={handleChange}
+        showMenu={showMenu}
+        handleSubmit={handleSubmit}
+      />
+      <Game deckID={deckID} cards={cards} handleClick={handleClick} />
+    </div>
+  );
+};
 
-  render() {
-    console.log(this.state);
-    const { deckID, cards, showMenu } = this.state;
-    return (
-      <div className="app">
-        <h2>Blackjack</h2>
-        <Menu
-          generateDeck={this.generateDeck}
-          handleChange={this.handleChange}
-          getCards={this.getCards}
-          showMenu={showMenu}
-          handleSubmit={this.handleSubmit}
-        />
-        <Game deckID={deckID} cards={cards} handleClick={this.handleClick} />
-      </div>
-    );
-  }
-}
+export default App;
