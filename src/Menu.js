@@ -1,21 +1,20 @@
 import React from "react";
 
-class Menu extends React.Component {
+const Menu = ({generateDeck, fetch2CardsByDeckId, handleChange}) => {
 
-  render() {
+  
     return (
       <div>
         <section>
-          <button onClick={this.props.generateDeck}>Generate Deck</button>
+          <button onClick={generateDeck}>Generate Deck</button>
         </section>
-        <form onSubmit={this.props.fetch2CardsByDeckId}>
+        <form onSubmit={fetch2CardsByDeckId}>
           <label htmlFor="cardIdInput">Input Existing Deck</label>
-          <input onChange={this.props.handleChange} id="cardIdInput" />
+          <input onChange={handleChange} id="cardIdInput" />
           <button>Draw</button>
         </form>
       </div>
     );
   }
-}
 
 export default Menu;
