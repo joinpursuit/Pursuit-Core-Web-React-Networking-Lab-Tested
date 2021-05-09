@@ -7,6 +7,7 @@ import "./App.css";
 
 export default class App extends React.Component {
   state = { cardsArr: [], deckId: "" };
+
   cardDeck = async () => {
     try {
       const res = await axios.get(
@@ -18,30 +19,43 @@ export default class App extends React.Component {
     }
   };
 
-  drawCards = async () => {
-    const { deckID } = this.state;
+  drawCards = async (input) => {
+    this.setState({ deckId: input });
     try {
       const res = await axios.get(
-        `https://deckofcardsapi.com/api/deck/${deckID}/draw?count=1`
+        `https://deckofcardsapi.com/api/deck/${input}/draw?count=2`
       );
       this.setState({ cardsArr: res.data.cards });
-      // debugger
-      console.log(res);
     } catch (error) {
-      this.setState({ card: [] });
+      this.setState({ cardsArr: [], deckID: "" });
     }
   };
+
+  hitMe = async () => {
+    const { deckId } = this.state;
+    try {
+      const res = await axios.get(
+        `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=1`
+      );
+      this.setState((prevState) => ({
+        cardsArr: [...prevState.cardsArr, ...res.data.cards],
+      }));
+    } catch (error) {
+      console.log(error);
+      this.setState({ deckID: "", cardsArr: [] });
+    }
+  };
+
   componentDidMount() {
     this.cardDeck();
-    // this.drawCards()
   }
   componentDidUpdate() {
-    // this.drawCards()
   }
   render() {
     const { deckId, cardsArr } = this.state;
     const cardDeck = this.cardDeck;
     const drawCards = this.drawCards;
+    const hitMe = this.hitMe;
     return (
       <div className="app">
         <Menu
@@ -49,8 +63,9 @@ export default class App extends React.Component {
           drawCards={drawCards}
           deckId={deckId}
           cards={cardsArr}
+          hitMe={this.hitMe}
         />
-        <Game cards={cardsArr} drawCards={drawCards} deckId={deckId} />
+        <Game cards={cardsArr} hitMe={hitMe} deckId={deckId} />
       </div>
     );
   }

@@ -1,20 +1,34 @@
 import React from "react";
 
-const Menu = ({ cardDeck, cards, deckId }) => {
-  return (
-    <div>
-      <h1>Blackjack</h1>
-      <button onClick={cardDeck}>Generate Deck</button>
-      <p>Deck ID: {deckId}</p>
-        {cards.map((card) => {
-        const { image } = card;
-        return <img src={image} alt="cardPics" />
-      })}
-      <label htmlFor="card">Input Existing CardDeck</label>
-      <input name="card" id="card" onChange={cardDeck} value={deckId}/>
-      <button onClick={cardDeck}>Draw</button>
-    </div>
-  );
-};
+ class Menu extends React.Component{
+  state = {input: ''}
+
+  handleInput = (e) => {
+    this.setState({input: e.target.value})
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const {drawCards} = this.props
+    const {input} = this.state
+    drawCards(input)
+  }
+  render() {
+    const {cardDeck} = this.props
+    const {input} = this.state
+    return (
+      <div>
+       <h1>Blackjack</h1>
+       <button type="button" onClick={cardDeck}>Generate Deck</button>
+       <form onSubmit={this.handleSubmit}>
+       <label htmlFor="card">Input Existing Deck</label>
+       <input name="card" id="card" onChange={this.handleInput} value={input}/>
+       <button>Draw</button>
+       </form>
+     </div>
+   );
+  }
+}
+
 
 export default Menu;
