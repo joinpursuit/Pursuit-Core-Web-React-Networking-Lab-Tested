@@ -1,3 +1,11 @@
 .app {
   text-align: center;
+  margin-bottom: 50px;
+}
+
+.cardTable {
+  background-color: green;
+  margin: 20px;
+  padding: 40px;
+  border: 10px outset rgb(114, 31, 31);
 }
