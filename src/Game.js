@@ -7,7 +7,7 @@ const Game = ({ deckId, cards, hitMe }) => {
       {cards.map((card,index) => {
         return <img src={card.image} alt="card" key={index}/>
       })}
-      <button onClick={()=>hitMe()}>Hit Me!</button>
+      <button onClick={hitMe}>Hit Me!</button>
     </div>
   );
 };
