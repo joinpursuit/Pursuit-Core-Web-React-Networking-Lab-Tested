@@ -21,9 +21,14 @@ export default class App extends React.Component {
   drawCard = async (e) => {
     e.preventDefault()
     try {
+<<<<<<< HEAD
       const { deckId } = this.state
       const res = await axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`);
       this.setState({ cards: res.data.cards })
+=======
+      const res = await axios.get(`https://deckofcardsapi.com/api/deck/${input}/draw?count=2`);
+      this.setState({ deckId: input, cards: res.data.cards })
+>>>>>>> 4f9fe07493810e113d5f394b59f93f10ad0b17ec
     } catch (error) {
       console.log(error);
       this.setState({ cards: [] })
@@ -33,10 +38,10 @@ export default class App extends React.Component {
   hitMe = async () => {
     const { deckId } = this.state;
     try {
-      const res = await axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
-      this.setState((prevState) => {
-        return { cards: [...prevState.cards, ...res.data.cards] }
-      })
+      const res = await axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw?count=1`);
+      this.setState((prevState) => ({
+        cards: [...prevState.cards, ...res.data.cards]
+      }))
     } catch (error) {
       console.log(error);
       this.setState((prevState) => {
@@ -55,7 +60,13 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <h1>Blackjack</h1>
+<<<<<<< HEAD
         {deckId && cards.length !== 0 ? <Game deckId={deckId} cards={cards} hitMe={this.hitMe}/> : <Menu deckId={deckId} generateDeck={this.generateDeck} drawCard={this.drawCard} handleChange={this.handleChange}/>}
+=======
+        {!deckId ? <Menu generateDeck={this.generateDeck} drawCard={this.drawCard} /> :
+          <Game deckId={deckId} cards={cards} hitMe={this.hitMe} />}
+
+>>>>>>> 4f9fe07493810e113d5f394b59f93f10ad0b17ec
       </div>
     );
   }
