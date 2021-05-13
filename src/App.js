@@ -1,42 +1,76 @@
 import React from "react";
-
-import "./App.css";
-import Game from "./Game";
 import Menu from "./Menu";
+import Game from "./Game";
 import axios from "axios";
 
-export default class App extends React.Component {
-  state = { deckId: "", cards: [] };
+import "./App.css";
 
-  card = () => {
-    this.state.cards.map((card) => {
-      console.log("card")
-      // debugger;
-      // return <img src={card} alt="card" />;
-    });
-  };
+export default class App extends React.Component {
+  state = { deckID: "", cards: [], showMenu: true };
 
   generateDeck = async () => {
     try {
       const res = await axios.get(
         "https://deckofcardsapi.com/api/deck/new/draw?count=2"
       );
-      const id = res.data.deck_id;
-      // const hand = res.data.cards;
-      this.setState({ deckId: id });
-      // console.log(id);
-      // debugger;
-    } catch (err) {
-      console.log(err);
+      this.setState({
+        deckID: res.data.deck_id,
+        cards: res.data.cards,
+        showMenu: false,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({ deckID: "", cards: [] });
     }
   };
 
+  handleChange = (e) => {
+    const myDeckID = e.target.value;
+    this.setState({ deckID: myDeckID });
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { deckID } = this.state;
+
+      const res = await axios.get(
+        `https://deckofcardsapi.com/api/deck/${deckID}/draw?count=2`
+      );
+
+      this.setState({ cards: res.data.cards });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  handleClick = async () => {
+    try {
+      const { deckID } = this.state;
+      const res = await axios.get(
+        `https://deckofcardsapi.com/api/deck/${deckID}/draw?count=1`
+      );
+      this.setState((prevState)=>(
+        { cards: [...prevState.cards, ...res.data.cards] }))
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   render() {
-    const { deckId, cards } = this.state;
+    console.log(this.state);
+    const { deckID, cards, showMenu } = this.state;
     return (
       <div className="app">
-        <Menu generateDeck={this.generateDeck} deckId={deckId} />
-        <Game deckId={deckId} card={this.card} cards={cards}/>
+        <h2>Blackjack</h2>
+        <Menu
+          generateDeck={this.generateDeck}
+          handleChange={this.handleChange}
+          showMenu={showMenu}
+          handleSubmit={this.handleSubmit}
+        />
+        <Game deckID={deckID} cards={cards} handleClick={this.handleClick} />
       </div>
     );
   }
