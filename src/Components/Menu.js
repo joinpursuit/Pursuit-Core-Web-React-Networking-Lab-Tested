@@ -4,7 +4,7 @@ const Menu = ({ getCards, handleSubmit, deckId, handleChange }) => {
     return (
         <form onSubmit={handleSubmit}>
             <button onClick={getCards}>Generate Deck</button>
-            <br />
+
             <label htmlFor='my-deck-id'>Input Existing Deck</label>
             <br />
             <input onChange={handleChange} type='text' value={deckId} id='my-deck-id' />
