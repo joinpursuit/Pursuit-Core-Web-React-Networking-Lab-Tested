@@ -77,13 +77,12 @@ export default class App extends React.Component {
       <div className="app">
         <h1>Blackjack</h1>
 
-        {!deckId && <Menu
+
+        <Menu
           getCards={this.getCards}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           deckId={deckId} />
-        }
-
 
         {deckId && <Game
           cards={cards}
