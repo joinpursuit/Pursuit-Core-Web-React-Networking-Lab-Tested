@@ -12,7 +12,7 @@ export default class App extends React.Component {
 
 	fetchCards = async () => {
 		try {
-			const { data } = await axios.get('https://deckofcardsapi.com/api/deck/new/draw/?count=2')
+			const { data } = await axios.get('https://deckofcardsapi.com/api/deck/new/draw?count=2')
 			console.log(data)
 			this.setState({
 				deckID: data.deck_id,
@@ -31,7 +31,7 @@ export default class App extends React.Component {
 
 		try {
 			const { data } = await axios.get(
-				`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`
+				`https://deckofcardsapi.com/api/deck/${deckID}/draw?count=1`
 			)
 			this.setState({
 				cards: [...this.state.cards, ...data.cards],
@@ -68,7 +68,9 @@ export default class App extends React.Component {
 			<div className='app'>
 				<h1>BlackJack!</h1>
 				<hr />
-				{cards.length === 0 && (
+				{deckID && cards.length !== 0 ? (
+					<Game cards={cards} deckID={deckID} drawOne={this.drawOne} />
+				) : (
 					<Menu
 						handleChange={this.handleChange}
 						handleSubmit={this.handleSubmit}
@@ -76,7 +78,6 @@ export default class App extends React.Component {
 						deckID={deckID}
 					/>
 				)}
-				{cards.length !== 0 && <Game cards={cards} deckID={deckID} drawOne={this.drawOne} />}
 			</div>
 		)
 	}
