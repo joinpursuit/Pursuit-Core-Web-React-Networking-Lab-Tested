@@ -76,20 +76,16 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <h1>Blackjack</h1>
+        {cards.length === 0 && <Menu
+          getCards={this.getCards}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          deckId={deckId} />}
 
-        {deckId && cards.length !== 0 ? <Game
+        {cards.length !== 0 && <Game
           cards={cards}
           deckId={deckId}
-          drawCard={this.drawCard} /> :
-          <Menu
-            getCards={this.getCards}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            deckId={deckId} />
-        }
-
-
-
+          drawCard={this.drawCard} />}
       </div>
     );
   }
