@@ -42,7 +42,7 @@ export default class Menu extends Component {
 				<button onClick={this.getNewDeck}>Generate Deck</button>
 				<label>
 					Input Existing Deck
-					<input />
+					<input onChange={this.useDeckId }/>
 				</label>
 				<button onClick={this.useDeckId}>Draw</button>
 				<br />
