@@ -1,0 +1,13 @@
+.HooksGame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CardsTable {
+    background-color: green;
+    border: 16px solid brown;
+    padding: 20px;
+    margin: 20px;
+}
+

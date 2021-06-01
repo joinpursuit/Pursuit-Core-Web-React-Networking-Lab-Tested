@@ -73,19 +73,19 @@ export default class App extends React.Component {
 
     if (showCards === true) {
       return (
-        <div className="app">
+      <div className="app">
         <h1>Blackjack</h1>
         <Game cards={cards} deckId={deckId} handleHitMe={this.handleHitMe} />
       </div>
       )
     }
     else {
-    return (
-      <div className="app">
-        <h1>Blackjack</h1>
-        <Menu generateNewDeck={this.generateNewDeck} handleChange={this.handleChange} handleSubmit={this.handleSubmit} deckId={deckId} />
-      </div>
-    );
+      return (
+        <div className="app">
+          <h1>Blackjack</h1>
+          <Menu generateNewDeck={this.generateNewDeck} handleChange={this.handleChange} handleSubmit={this.handleSubmit} deckId={deckId} />
+        </div>
+      );
     }
   }
 }
