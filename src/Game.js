@@ -1,13 +1,13 @@
 // import React from "react";
 
-// const Game = ({ drawTwoCards, deckId, cards }) => {
+// const Game = ({ hitMe, deckId, cards }) => {
 
 
 //   // onClick two card images are saved into state as an array and displayed in an image tag
 //   return (
 //     <section>
 //       <p>{`Deck ID: ${deckId}`}</p>
-//       <button onClick={drawTwoCards} value={deckId}>Hit Me!</button>
+//       <button onClick={hitMe} value={deckId}>Hit Me!</button>
 //       <img src={cards[0]} alt=""/>
 //       <img src={cards[1]} alt=""/>
 //     </section>
@@ -24,11 +24,11 @@
 
 import React from "react";
 
-const Game = ({ drawTwoCards, deckId, cards }) => {
+const Game = ({ hitMe, deckId, cards }) => {
   return (
     <section>
       <p>{`Deck ID: ${deckId}`}</p>
-      <button onClick={drawTwoCards} value={deckId}>
+      <button onClick={hitMe} value={deckId}>
         Hit Me!
       </button>
       {cards.map((card) => {

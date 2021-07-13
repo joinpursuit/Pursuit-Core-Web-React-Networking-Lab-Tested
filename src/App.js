@@ -20,17 +20,23 @@ class App extends React.Component {
     }
   };
 
-  drawTwoCards = async () => {
+  hitMe = async () => {
     const { deckId } = this.state;
     try {
       const res = await axios.get(
-        `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=2`
+        `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=1`
         // `https://deckofcardsapi.com/api/deck/${deckId}/draw?count=1`
       );
-      this.setState({
-        cards: res.data.cards,
-        // cards: [res.data.cards[0].image, res.data.cards[1].image],
-      });
+
+      this.setState((prevState) => ({
+        cards: [...prevState.cards, res.data.cards]
+        
+      }));
+
+      // this.setState({
+      //   cards: res.data.cards,
+      //   // cards: [res.data.cards[0].image, res.data.cards[1].image],
+      // });
 
       // debugger;
     } catch (error) {
@@ -53,7 +59,7 @@ class App extends React.Component {
           deckId={deckId}
           cards={cards}
         />
-        <Game drawTwoCards={this.drawTwoCards} deckId={deckId} cards={cards} />
+        <Game hitMe={this.hitMe} deckId={deckId} cards={cards} />
         {/* <Game deckId={deckId} card={this.card} cards={cards}/> */}
       </div>
     );
